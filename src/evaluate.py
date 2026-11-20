@@ -91,7 +91,7 @@ def write_failure_cases(main, x_test, y_test) -> None:
             f"- 真实标签：{true}",
             f"- 预测标签：{guess}",
             f"- 置信度：{fmt(conf)}",
-            "- 初步分析：见 `report/报告正文.md` 第五节。",
+            "- 初步分析：见实验记录中的误差归因。",
             "",
         ]
 

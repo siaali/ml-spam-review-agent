@@ -47,7 +47,6 @@
 | `src/make_run_screenshot.py` | 将运行记录渲染为截图 |
 | `data/` | 正式数据、原始数据与数据说明 |
 | `experiments/` | 实验结果、运行记录、失败案例与截图 |
-| `report/` | 报告正文、组件清单、AI 使用声明与 PDF 生成脚本 |
 
 ## 运行环境
 

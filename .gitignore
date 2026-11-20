@@ -7,6 +7,7 @@ venv/
 .DS_Store
 
 # 临时校验文件与过程草稿，不作为交付物
+/report/
 /report/报告_校验*.txt
 /report/报告提纲.md
 /report/参考文献占位.md

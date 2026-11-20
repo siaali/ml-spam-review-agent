@@ -80,9 +80,10 @@ python src/agent.py --stdin
 
 运行记录见 `experiments/demo_run.md`，截图见 `experiments/run_demo.png`。
 
-## 复用组件与学术规范
+## 复用组件与许可证
 
-- jieba 0.42.1，MIT；scikit-learn 1.9.1，BSD-3-Clause；UCI SMS Spam Collection，CC BY 4.0。
-- 组件来源、版本、许可证、用途与适配工作见 `report/复用组件清单.md`。
-- 生成式 AI 的参与环节见 `report/AI使用声明.md`。
-- 报告 PDF 见 `report/期末报告.pdf`。
+- jieba 0.42.1，MIT，https://github.com/fxsjy/jieba
+- scikit-learn 1.9.1，BSD-3-Clause，https://scikit-learn.org/
+- UCI SMS Spam Collection，CC BY 4.0，https://archive.ics.uci.edu/dataset/228/sms+spam+collection
+
+数据来源、隐私处理与划分规则见 `data/说明.md`；实验记录、失败案例与演示材料见 `experiments/`。

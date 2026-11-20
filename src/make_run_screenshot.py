@@ -1,5 +1,6 @@
-"""把真实运行记录渲染成一张终端风格截图，便于贴进报告附录。"""
+"""把真实运行记录渲染成终端风格截图，便于贴进报告附录。"""
 
+import sys
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
@@ -7,6 +8,7 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parent.parent
 TRANSCRIPT = ROOT / "experiments" / "demo_transcript.txt"
 OUTPUT = ROOT / "experiments" / "run_demo.png"
+FULL_OUTPUT = ROOT / "experiments" / "run_demo_full.png"
 FONT_PATH = "/System/Library/Fonts/STHeiti Medium.ttc"
 
 WIDTH = 1500
@@ -52,9 +54,29 @@ def condense(raw: list[str]) -> list[str]:
     return result
 
 
+def select_full_case(raw: list[str]) -> list[str]:
+    """截取低置信度样例的完整命令与 JSON 输出。"""
+    start = None
+    for i, line in enumerate(raw):
+        if line.startswith("$ ") and "Nokia phone is lovly.." in line:
+            start = i
+            break
+    if start is None:
+        raise ValueError("运行记录中未找到低置信度样例")
+    return raw[start:]
+
+
 def main() -> None:
     raw = TRANSCRIPT.read_text(encoding="utf-8").splitlines()
-    raw = condense(raw)
+    full_mode = "--full" in sys.argv
+    if full_mode:
+        raw = select_full_case(raw)
+        output = FULL_OUTPUT
+        header = "Terminal - 短消息审核 Agent 完整 JSON 输出"
+    else:
+        raw = condense(raw)
+        output = OUTPUT
+        header = "Terminal - 短消息审核 Agent 运行演示"
     font = ImageFont.truetype(FONT_PATH, FONT_SIZE)
 
     probe = Image.new("RGB", (WIDTH, 100), "white")
@@ -71,7 +93,7 @@ def main() -> None:
     draw = ImageDraw.Draw(img)
 
     draw.rectangle([0, 0, WIDTH, header_height], fill="#2D2D2D")
-    draw.text((MARGIN, 14), "Terminal - 评论审核 Agent 运行演示", font=font, fill="#FFFFFF")
+    draw.text((MARGIN, 14), header, font=font, fill="#FFFFFF")
     draw.ellipse([WIDTH - 100, 18, WIDTH - 84, 34], fill="#FF5F56")
     draw.ellipse([WIDTH - 72, 18, WIDTH - 56, 34], fill="#FFBD2E")
     draw.ellipse([WIDTH - 44, 18, WIDTH - 28, 34], fill="#27C93F")
@@ -82,8 +104,8 @@ def main() -> None:
         draw.text((MARGIN, y), line, font=font, fill=color)
         y += LINE_HEIGHT
 
-    img.save(OUTPUT)
-    print(f"运行截图已生成：{OUTPUT}（{WIDTH}x{height}）")
+    img.save(output)
+    print(f"运行截图已生成：{output}（{WIDTH}x{height}）")
 
 
 if __name__ == "__main__":

@@ -77,7 +77,7 @@ python src/agent.py "Nokia phone is lovly.."
 python src/agent.py --stdin
 ```
 
-运行记录见 `experiments/demo_run.md`，截图见 `experiments/run_demo.png`。
+运行记录见 `experiments/demo_run.md`，关键输出截图见 `experiments/run_demo.png`，完整 JSON 截图见 `experiments/run_demo_full.png`。
 
 ## 复用组件与许可证
 

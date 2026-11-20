@@ -1,0 +1,80 @@
+机器学习期末项目 - Agent 完整运行记录
+运行日期：2026-11-19
+
+$ python src/agent.py "Free entry in 2 a wkly comp to win FA Cup final tkts 21st May 2005. Text FA to 87121 to receive entry question"
+{
+  "label": "spam",
+  "confidence": 1.0,
+  "action": "隐藏",
+  "reason": "模型有把握判断这是垃圾广告。",
+  "input": "Free entry in 2 a wkly comp to win FA Cup final tkts 21st May 2005. Text FA to 87121 to receive entry question",
+  "similar_comments": [
+    {
+      "text": "Free entry in 2 a wkly comp to win FA Cup final tkts 21st May 2005. Text FA to 87121 to receive entry question(std txt rate)T&C's apply 08452810075over18's",
+      "label": "spam",
+      "similarity": 0.8726
+    },
+    {
+      "text": "Free entry in 2 a weekly comp for a chance to win an ipod. Txt POD to 80182 to get entry (std txt rate) T&C's apply 08452810073 for details 18+",
+      "label": "spam",
+      "similarity": 0.2907
+    },
+    {
+      "text": "ree entry in 2 a weekly comp for a chance to win an ipod. Txt POD to 80182 to get entry (std txt rate) T&C's apply 08452810073 for details 18+",
+      "label": "spam",
+      "similarity": 0.2693
+    }
+  ]
+}
+
+$ python src/agent.py "Ok lar... Joking wif u oni..."
+{
+  "label": "normal",
+  "confidence": 1.0,
+  "action": "通过",
+  "reason": "模型有把握判断这是正常评论。",
+  "input": "Ok lar... Joking wif u oni...",
+  "similar_comments": [
+    {
+      "text": "Ok lar... Joking wif u oni...",
+      "label": "normal",
+      "similarity": 1.0
+    },
+    {
+      "text": "Ok...",
+      "label": "normal",
+      "similarity": 0.428
+    },
+    {
+      "text": "Anything lar...",
+      "label": "normal",
+      "similarity": 0.3921
+    }
+  ]
+}
+
+$ python src/agent.py "Nokia phone is lovly.."
+{
+  "label": "spam",
+  "confidence": 0.523,
+  "action": "转人工复核",
+  "reason": "置信度低于阈值 0.65，模型自己不敢拍板。",
+  "input": "Nokia phone is lovly..",
+  "similar_comments": [
+    {
+      "text": "Nokia phone is lovly..",
+      "label": "normal",
+      "similarity": 1.0
+    },
+    {
+      "text": "My phone",
+      "label": "normal",
+      "similarity": 0.3208
+    },
+    {
+      "text": "Ok..",
+      "label": "normal",
+      "similarity": 0.1969
+    }
+  ]
+}

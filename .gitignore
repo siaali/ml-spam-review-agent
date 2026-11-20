@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.tmp/
+.env
+.DS_Store
+
+# 临时校验文件与过程草稿，不作为交付物
+/report/报告_校验*.txt
+/report/报告提纲.md
+/report/参考文献占位.md
+/experiments/实验记录模板.md
+/src/make_demo_data.py
+/591b5tnr
+/cj1agi54
